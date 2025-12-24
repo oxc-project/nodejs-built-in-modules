@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "template"
+name = "nodejs-built-in-modules"
 version = "0.0.1"
