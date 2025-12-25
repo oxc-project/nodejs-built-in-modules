@@ -21,7 +21,7 @@ test = false
 doctest = false
 
 [dev-dependencies]
-criterion = "0.5"
+criterion2 = "3.0"
 
 [[bench]]
 name = "is_builtin"
