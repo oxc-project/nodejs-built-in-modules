@@ -1,3 +1,5 @@
+use std::borrow::Cow;
+
 use nodejs_built_in_modules::{
     BUILTINS, BUILTINS_WITH_MANDATORY_NODE_PREFIX, is_nodejs_builtin_module,
 };
@@ -79,88 +81,41 @@ fn pass() {
         "wasi",
         "worker_threads",
         "zlib",
-        "node:_http_agent",
-        "node:_http_client",
-        "node:_http_common",
-        "node:_http_incoming",
-        "node:_http_outgoing",
-        "node:_http_server",
-        "node:_stream_duplex",
-        "node:_stream_passthrough",
-        "node:_stream_readable",
-        "node:_stream_transform",
-        "node:_stream_wrap",
-        "node:_stream_writable",
-        "node:_tls_common",
-        "node:_tls_wrap",
-        "node:assert",
-        "node:assert/strict",
-        "node:async_hooks",
-        "node:buffer",
-        "node:child_process",
-        "node:cluster",
-        "node:console",
-        "node:constants",
-        "node:crypto",
-        "node:dgram",
-        "node:diagnostics_channel",
-        "node:dns",
-        "node:dns/promises",
-        "node:domain",
-        "node:events",
-        "node:fs",
-        "node:fs/promises",
-        "node:http",
-        "node:http2",
-        "node:https",
-        "node:inspector",
-        "node:inspector/promises",
-        "node:module",
-        "node:net",
-        "node:os",
-        "node:path",
-        "node:path/posix",
-        "node:path/win32",
-        "node:perf_hooks",
-        "node:process",
-        "node:punycode",
-        "node:querystring",
-        "node:readline",
-        "node:readline/promises",
-        "node:repl",
-        "node:stream",
-        "node:stream/consumers",
-        "node:stream/promises",
-        "node:stream/web",
-        "node:string_decoder",
-        "node:sys",
-        "node:timers",
-        "node:timers/promises",
-        "node:tls",
-        "node:trace_events",
-        "node:tty",
-        "node:url",
-        "node:util",
-        "node:util/types",
-        "node:v8",
-        "node:vm",
-        "node:wasi",
-        "node:worker_threads",
-        "node:zlib",
+    ];
+
+    for specifier in pass {
+        for specifier in [
+            Cow::Borrowed(specifier),
+            Cow::Owned(format!("node:{specifier}")),
+        ] {
+            assert!(is_nodejs_builtin_module(&specifier));
+        }
+    }
+
+    let prefixed = [
         "node:sea",
         "node:sqlite",
         "node:test",
         "node:test/reporters",
     ];
 
-    for specifier in pass {
+    for specifier in prefixed {
         assert!(is_nodejs_builtin_module(specifier));
     }
 }
 
 #[test]
 fn fail() {
-    let fail = ["sea", "sqlite", "test", "test/reporters"];
+    let fail = [
+        "node",
+        "node:",
+        "node:aaa",
+        "aaa",
+        "sea",
+        "sqlite",
+        "test",
+        "test/reporters",
+    ];
 
     for specifier in fail {
         assert!(!is_nodejs_builtin_module(specifier));

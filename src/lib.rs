@@ -84,5 +84,9 @@ pub static BUILTINS_WITH_MANDATORY_NODE_PREFIX: &[&str] =
 
 /// Is `specifier` a node.js built-in module?
 pub fn is_nodejs_builtin_module(specifier: &str) -> bool {
-    specifier.starts_with("node:") || BUILTINS.binary_search(&specifier).is_ok()
+    if let Some(stripped) = specifier.strip_prefix("node:") {
+        return BUILTINS.contains(&stripped)
+            || BUILTINS_WITH_MANDATORY_NODE_PREFIX.contains(&stripped);
+    }
+    BUILTINS.contains(&specifier)
 }
