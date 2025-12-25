@@ -11,6 +11,10 @@ alias r := ready
 init:
   cargo binstall watchexec-cli cargo-insta typos-cli cargo-shear dprint -y
 
+update-builtins:
+  cargo run -p update_builtins
+  cargo fmt
+
 ready:
   git diff --exit-code --quiet
   typos

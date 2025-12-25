@@ -1,3 +1,7 @@
+[workspace]
+members = [".", "tasks/update_builtins"]
+resolver = "2"
+
 [package]
 name = "nodejs-built-in-modules"
 version = "0.0.1"

@@ -26,6 +26,7 @@ Found 12 outliers among 100 measurements (12.00%)
 **Result:** The `contains` method is ~18% faster than `binary_search` (3.24 µs vs 3.84 µs).
 
 Run benchmarks with:
+
 ```bash
 cargo bench
 ```

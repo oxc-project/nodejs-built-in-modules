@@ -1,4 +1,4 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
 use nodejs_built_in_modules::{BUILTINS, BUILTINS_WITH_MANDATORY_NODE_PREFIX};
 
 /// Version using contains (current implementation)

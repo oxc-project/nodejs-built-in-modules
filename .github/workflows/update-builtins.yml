@@ -1,0 +1,53 @@
+name: Update Built-in Modules
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".node-version"
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  update-builtins:
+    name: Update Node.js Built-in Modules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          token: ${{ secrets.OXC_BOT_PAT }}
+
+      - name: Read Node.js version
+        id: node-version
+        run: echo "version=$(cat .node-version)" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        uses: actions/setup-node@0a44ba7841725637a19e28fa30b79a866c81b0a6 # v4.0.4
+        with:
+          node-version: ${{ steps.node-version.outputs.version }}
+
+      - name: Setup Rust
+        uses: oxc-project/setup-rust@ecabb7322a2ba5aeedb3612d2a40b86a85cee235 # v1.0.11
+
+      - name: Update built-in modules list
+        run: cargo run -p update_builtins
+
+      - name: Format generated code
+        run: cargo fmt
+
+      - name: Run tests
+        run: cargo test
+
+      - uses: stefanzweifel/git-auto-commit-action@28e16e81777b558cc906c8750092100bbb34c5e3 # v7.0.0
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        with:
+          commit_message: "chore: update built-in modules for Node.js ${{ steps.node-version.outputs.version }} [skip ci]"
+          file_pattern: src/lib.rs
