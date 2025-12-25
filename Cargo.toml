@@ -15,3 +15,10 @@ description = "Node.js built-in modules"
 [lib]
 test = false
 doctest = false
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "is_builtin"
+harness = false
