@@ -9,7 +9,8 @@ on:
     branches:
       - main
     paths:
-      - ".node-version"
+      - .node-version
+      - .github/workflows/update-builtins.yml
   workflow_dispatch:
 
 defaults:
@@ -26,26 +27,17 @@ jobs:
           persist-credentials: true
           token: ${{ secrets.OXC_BOT_PAT }}
 
-      - name: Read Node.js version
-        id: node-version
-        run: echo "version=$(cat .node-version)" >> $GITHUB_OUTPUT
+      - uses: oxc-project/setup-node@8958a8e040102244b619c4a94fccb657a44b1c21 # v1.0.6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+      - uses: oxc-project/setup-rust@c8224157c0bf235aabc633e8cd50d344f087a7de # v1.0.12
         with:
-          node-version: ${{ steps.node-version.outputs.version }}
+          components: rustfmt
 
-      - name: Setup Rust
-        uses: oxc-project/setup-rust@c8224157c0bf235aabc633e8cd50d344f087a7de # v1.0.12
+      - run: cargo run -p update_builtins
 
-      - name: Update built-in modules list
-        run: cargo run -p update_builtins
+      - run: cargo fmt
 
-      - name: Format generated code
-        run: cargo fmt
-
-      - name: Run tests
-        run: cargo test
+      - run: cargo test
 
       - uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
