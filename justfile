@@ -9,7 +9,7 @@ _default:
 alias r := ready
 
 init:
-  cargo binstall watchexec-cli cargo-insta typos-cli cargo-shear dprint -y
+  cargo binstall watchexec-cli cargo-insta typos-cli cargo-shear -y
 
 update-builtins:
   cargo run -p update_builtins
@@ -30,7 +30,7 @@ watch *args='':
 fmt:
   cargo shear --fix
   cargo fmt --all
-  dprint fmt
+  pnpm fmt
 
 check:
   cargo check --workspace --all-features --all-targets --locked
