@@ -6,7 +6,7 @@
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
-    "oxfmt": "^0.24.0"
+    "oxfmt": "^0.26.0"
   },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"
