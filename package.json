@@ -5,7 +5,7 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.1",
+    "lint-staged": "^16.0.0",
     "oxfmt": "^0.34.0"
   },
   "lint-staged": {
