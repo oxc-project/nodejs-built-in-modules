@@ -34,6 +34,9 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - uses: voidzero-dev/setup-vp@40646972e9ea5e33609c1bb31ac6a27fb01b641e # v1.10.0
+        with:
+          node-version-file: .node-version
+          run-install: false
 
       - uses: oxc-project/setup-rust@23f38cfb0c04af97a055f76acee94d5be71c7c82 # v1.0.16
         with:
