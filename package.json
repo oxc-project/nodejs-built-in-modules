@@ -1,15 +1,11 @@
 {
+  "type": "module",
   "scripts": {
-    "prepare": "husky",
-    "fmt": "oxfmt"
+    "prepare": "vp config",
+    "fmt": "vp fmt"
   },
   "devDependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^16.0.0",
-    "oxfmt": "^0.50.0"
-  },
-  "lint-staged": {
-    "*": "oxfmt --no-error-on-unmatched-pattern"
+    "vite-plus": "catalog:"
   },
   "packageManager": "pnpm@11.0.4"
 }
