@@ -59,7 +59,6 @@ jobs:
       - uses: voidzero-dev/setup-vp@40646972e9ea5e33609c1bb31ac6a27fb01b641e # v1.10.0
         with:
           node-version-file: .node-version
-          run-install: false
 
       - run: vp fmt --check
 
