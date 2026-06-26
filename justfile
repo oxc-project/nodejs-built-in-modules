@@ -9,7 +9,7 @@ _default:
 alias r := ready
 
 init:
-  cargo binstall watchexec-cli cargo-insta typos-cli cargo-shear -y
+  cargo binstall watchexec-cli cargo-insta typos-cli cargo-shear@1.13.1 -y
 
 update-builtins:
   cargo run -p update_builtins
@@ -28,7 +28,7 @@ watch *args='':
   watchexec --no-vcs-ignore {{args}}
 
 fmt:
-  cargo shear --fix
+  cargo shear --fix --check-test-targets
   cargo fmt --all
   vp fmt
 
