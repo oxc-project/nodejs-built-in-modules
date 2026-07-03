@@ -14,9 +14,7 @@ fn is_nodejs_builtin_module_contains(specifier: &str) -> bool {
 fn is_nodejs_builtin_module_binary_search(specifier: &str) -> bool {
     if let Some(stripped) = specifier.strip_prefix("node:") {
         return BUILTINS.binary_search(&stripped).is_ok()
-            || BUILTINS_WITH_MANDATORY_NODE_PREFIX
-                .binary_search(&stripped)
-                .is_ok();
+            || BUILTINS_WITH_MANDATORY_NODE_PREFIX.binary_search(&stripped).is_ok();
     }
     BUILTINS.binary_search(&specifier).is_ok()
 }

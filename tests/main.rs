@@ -84,20 +84,12 @@ fn pass() {
     ];
 
     for specifier in pass {
-        for specifier in [
-            Cow::Borrowed(specifier),
-            Cow::Owned(format!("node:{specifier}")),
-        ] {
+        for specifier in [Cow::Borrowed(specifier), Cow::Owned(format!("node:{specifier}"))] {
             assert!(is_nodejs_builtin_module(&specifier));
         }
     }
 
-    let prefixed = [
-        "node:sea",
-        "node:sqlite",
-        "node:test",
-        "node:test/reporters",
-    ];
+    let prefixed = ["node:sea", "node:sqlite", "node:test", "node:test/reporters"];
 
     for specifier in prefixed {
         assert!(is_nodejs_builtin_module(specifier));
@@ -106,16 +98,7 @@ fn pass() {
 
 #[test]
 fn fail() {
-    let fail = [
-        "node",
-        "node:",
-        "node:aaa",
-        "aaa",
-        "sea",
-        "sqlite",
-        "test",
-        "test/reporters",
-    ];
+    let fail = ["node", "node:", "node:aaa", "aaa", "sea", "sqlite", "test", "test/reporters"];
 
     for specifier in fail {
         assert!(!is_nodejs_builtin_module(specifier));
