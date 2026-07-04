@@ -46,11 +46,8 @@ fn main() {
         .collect();
     mandatory_prefix_modules.sort();
 
-    let mut regular_modules: Vec<String> = all_modules
-        .iter()
-        .filter(|m| !m.starts_with("node:"))
-        .cloned()
-        .collect();
+    let mut regular_modules: Vec<String> =
+        all_modules.iter().filter(|m| !m.starts_with("node:")).cloned().collect();
     regular_modules.sort();
 
     // Build the complete file with doc comments using quote!
@@ -94,8 +91,5 @@ fn main() {
 
     println!("✓ Updated built-in modules for Node.js v{node_version}");
     println!("  - {} regular modules", regular_modules.len());
-    println!(
-        "  - {} mandatory prefix modules",
-        mandatory_prefix_modules.len()
-    );
+    println!("  - {} mandatory prefix modules", mandatory_prefix_modules.len());
 }
