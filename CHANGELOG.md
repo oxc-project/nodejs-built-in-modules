@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Other
 
-- *(deps)* update rust crates to v1.0.47 ([#127](https://github.com/oxc-project/nodejs-built-in-modules/pull/127))
+- _(deps)_ update rust crates to v1.0.47 ([#127](https://github.com/oxc-project/nodejs-built-in-modules/pull/127))
 - update sponsor section
 - normalize README sponsor section
 
