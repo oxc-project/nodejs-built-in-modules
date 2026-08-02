@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1](https://github.com/oxc-project/nodejs-built-in-modules/compare/nodejs-built-in-modules-v1.0.0...nodejs-built-in-modules-v1.0.1) - 2026-08-02
+
+### Other
+
+- *(deps)* update rust crates to v1.0.47 ([#127](https://github.com/oxc-project/nodejs-built-in-modules/pull/127))
+- update sponsor section
+- normalize README sponsor section
+
 ## [1.0.0](https://github.com/oxc-project/nodejs-built-in-modules/compare/nodejs-built-in-modules-v0.0.1...nodejs-built-in-modules-v1.0.0) - 2025-12-26
 
 ### Added
