@@ -26,3 +26,9 @@ criterion2 = "3.0"
 [[bench]]
 name = "is_builtin"
 harness = false
+
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false
